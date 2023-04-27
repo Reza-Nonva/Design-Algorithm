@@ -1,4 +1,5 @@
 # Implementation of power function using Divide and Conquer algorithm
+# time complexity : O(log n)  
 
 def pow(x, n):   # x^n
     if( n == 0):
