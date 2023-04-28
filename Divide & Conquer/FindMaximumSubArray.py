@@ -1,4 +1,6 @@
 
+# find maximum subarray using divide and conquer algorithm
+#time copmlexity: O(n * log n)
 def maxCrossingSum(arr, low, mid, high):
 	
     sum = 0
@@ -32,6 +34,7 @@ def maxSubArraySum(arr, low, high):
 			maxCrossingSum(arr, low, mid, high))
 
 
+#example 
 arr = [-2, 1, -3, 4, -1, 2, 1, 5, 4]
 n = len(arr)
 
