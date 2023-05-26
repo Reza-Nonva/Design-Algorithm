@@ -1,4 +1,27 @@
+import matplotlib.pyplot as plt
+import networkx as nx
 from typing import List, Tuple
+
+def draw(edges):
+    G = nx.Graph()
+    for i in edges:
+        G.add_edge(i[0], i[1], weight = i[2])
+
+    edge = [(u, v) for (u, v, d) in G.edges(data=True)]
+
+    pos = nx.spring_layout(G, seed=7)
+    nx.draw_networkx_nodes(G, pos, node_size=700)
+    nx.draw_networkx_edges(G, pos, edgelist=edge, width=6)
+    nx.draw_networkx_labels(G, pos, font_size=20, font_family="sans-serif")
+    edge_labels = nx.get_edge_attributes(G, "weight")
+    nx.draw_networkx_edge_labels(G, pos, edge_labels)
+
+    ax = plt.gca()
+    ax.margins(0.08)
+    plt.axis("off")
+    plt.tight_layout()
+    plt.show()
+
 
 def read_grph_by_adjacency_matrix(num_nodes, edges):
     for i in range(num_nodes):
@@ -48,12 +71,12 @@ if __name__ == "__main__":
     edges = []
     read_grph_by_adjacency_matrix(num_nodes, edges)
 
-    print(kruskal(num_nodes, edges)) #print the tree
+    answer = kruskal(num_nodes, edges)
 
-    print(len(kruskal(num_nodes, edges)))  # print the depth of tree
-
-
-
+    print(answer) #print the tree
+    print(len(answer))  # print the depth of tree
+    
+    draw(answer)
 
 """
     example for read graph by edges: 
