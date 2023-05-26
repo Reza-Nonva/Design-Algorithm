@@ -1,7 +1,24 @@
 from typing import List, Tuple
 
+def read_grph_by_adjacency_matrix(num_nodes, edges):
+    for i in range(num_nodes):
+        read_line = input().split()
+        row_i = [int(x) for x in read_line]
+        for j in range(i):
+            if row_i[j] != 0:
+                edges.append((i, j, row_i[j]))
 
-def kruskal(num_nodes: int, num_edges: int, edges: List[Tuple[int, int, int]]) -> int:
+def read_by_edges(edges):
+    # if you want to input graph with (source, distance, weight) structures use these function
+    # in main func instead of read_grph_by_adjacency_matrix
+    num_edges = int(input())
+    for _ in range(num_edges): 
+        node1, node2, cost = [int(x) for x in input().strip().split()]
+        edges.append((node1, node2, cost))
+        
+
+
+def kruskal(num_nodes: int, edges: List[Tuple[int, int, int]]) -> int:
     
     edges = sorted(edges, key=lambda edge: edge[2])
 
@@ -27,19 +44,19 @@ def kruskal(num_nodes: int, num_edges: int, edges: List[Tuple[int, int, int]]) -
 
 
 if __name__ == "__main__":
-    num_nodes, num_edges = list(map(int, input().strip().split()))
+    num_nodes = int(input())
     edges = []
+    read_grph_by_adjacency_matrix(num_nodes, edges)
 
-    for _ in range(num_edges):
-        node1, node2, cost = [int(x) for x in input().strip().split()]
-        edges.append((node1, node2, cost))
+    print(kruskal(num_nodes, edges)) #print the tree
 
-    print(kruskal(num_nodes, num_edges, edges)) #print the tree
+    print(len(kruskal(num_nodes, edges)))  # print the depth of tree
 
-    print(len(kruskal(num_nodes, num_edges, edges)))  # print the depth of tree
+
+
 
 """
-    example: 
+    example for read graph by edges: 
 
     >>> kruskal(4, 3, [(0, 1, 3), (1, 2, 5), (2, 3, 1)])
     [(2, 3, 1), (0, 1, 3), (1, 2, 5)]
@@ -50,4 +67,13 @@ if __name__ == "__main__":
     >>> kruskal(4, 6, [(0, 1, 3), (1, 2, 5), (2, 3, 1), (0, 2, 1), (0, 3, 2),
     ... (2, 1, 1)])
     [(2, 3, 1), (0, 2, 1), (2, 1, 1)]
+
+
+    example for read graph by adjacency matrix:
+    >>> 4  
+        0 1 4 2
+        1 0 0 2
+        4 0 0 3
+        2 2 3 0
+        [(1, 0, 1), (3, 0, 2), (3, 2, 3)]
 """
