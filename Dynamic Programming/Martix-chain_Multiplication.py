@@ -17,6 +17,7 @@ def matrix_chain_order(p):
     
     #print("m: ", m)
     #print ("s: ", s)
+    print(m[1][n])
     print_optimal_parens(s, 1, n)
 
 
