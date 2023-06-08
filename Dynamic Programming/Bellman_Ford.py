@@ -9,7 +9,7 @@ def bellman_ford(G, source):
                 if distance[u] != float("inf"):
                     if (distance[u] + G[u][v] < distance[v]):
                         distance[v] = distance[u] + G[u][v]
-
+    #Check graph
     for u in range (n):
         for v in range(n):
             if(distance[u] != float("inf")):
@@ -17,6 +17,8 @@ def bellman_ford(G, source):
                     print("graph with negative cycle")
     print(distance)
 
+
+# Read adjacency matrix
 x = int(input())
 G = [[0 for _ in range(x)] for _ in range(x)]
 for i in range(x):
